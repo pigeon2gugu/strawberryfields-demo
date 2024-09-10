@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: strawberryfields
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+  mvc:
+    pathmatch:
+      matching-strategy: ${mvc.pathmatch.matching-strategy}
+    static-path-pattern: ${mvc.pathmatch.static-path-pattern}
+  web:
+    resources:
+      static-locations: ${web.resources.static-locations}
+      add-mappings: ${web.resources.add-mappings}
+  datasource:
+    url: ${rdb.url}
+    username: ${rdb.username}
+    password: ${rdb.password}
+    driver-class-name: ${driver-class-name}
+    hikari:
+      maximum-pool-size: ${hikari.max-pool-size}
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+  jpa:
+    show-sql: ${jpa.show-sql}
+    open-in-view: ${jpa.open-in-view}
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: ${google.client.id}
+#            client-secret: ${google.client.password}
+#            scope: profile, email
+
+  cloud:
+    aws:
+      secretsmanager:
+        region: ap-northeast-2
+  config:
+    import: aws-secretsmanager:secret/strawberryfields
+logging:
+  level:
+    root: ${logging.level.root}
+    p6spy: ${logging.level.p6spy}
+
+security:
+  access-token:
+    jwt-secret-key: ${security.access-token.jwt-secret-key}
+    expiry-in-milli: ${expiry-in-milli}
+  refresh-token:
+    length-byte: ${refresh-token.length-byte}
+    expiry-value: ${expiry-value}
+    expiry-unit: ${expiry-unit}
+
+cors:
+  allowed-origins: ${cors.allowed-origins}
+
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+
+springdoc:
+  use-fqn: true # fully qualified names : ??? class? ?? ?? ???
+
+
