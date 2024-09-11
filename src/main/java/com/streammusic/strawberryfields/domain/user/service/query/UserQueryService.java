@@ -1,9 +1,12 @@
 package com.streammusic.strawberryfields.domain.user.service.query;
 
+import java.util.function.Function;
+
 import org.springframework.stereotype.Service;
 
 import com.streammusic.strawberryfields.domain.user.persistence.domain.User;
 import com.streammusic.strawberryfields.domain.user.persistence.repository.query.UserQueryRepository;
+import com.streammusic.strawberryfields.domain.user.service.dto.CheckDuplicationDto;
 import com.streammusic.strawberryfields.global.exception.NotFoundException;
 import com.streammusic.strawberryfields.global.exception.resultcode.NotFoundResourceCode;
 
@@ -26,6 +29,14 @@ public class UserQueryService {
 		return userQueryRepository
 			.findByEmail(email)
 			.orElseThrow(() -> new NotFoundException(NotFoundResourceCode.USER));
+	}
+
+	public CheckDuplicationDto.Response checkDuplication(
+		String field, Function<String, Boolean> checkFunction) {
+		boolean isDuplicate = checkFunction.apply(field);
+		CheckDuplicationDto.Response response =
+			new CheckDuplicationDto.Response(isDuplicate);
+		return response;
 	}
 
 	public boolean isDuplicatedEmail(String email) {
