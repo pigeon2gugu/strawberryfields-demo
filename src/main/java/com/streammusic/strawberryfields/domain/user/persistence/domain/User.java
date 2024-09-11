@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Table(
 	name = "users",
 	indexes = {})
-@AttributeOverride(name = "id", column = @Column(name = "user_id"))
+@AttributeOverride(name = "id", column = @Column(name = "id"))
 @Entity
 @SQLRestriction("deleted_at is null")
 public class User extends AbstractJpaPersistable {
