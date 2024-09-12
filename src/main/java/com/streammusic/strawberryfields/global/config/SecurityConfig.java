@@ -8,7 +8,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfigurationSource;
+
+import com.streammusic.strawberryfields.global.security.filter.JwtAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-	//private final JwtAuthenticationFilter jwtAuthenticationFilter;
+	private final JwtAuthenticationFilter jwtAuthenticationFilter;
 	private final CorsConfigurationSource corsConfigurationSource;
 
 	@Bean
@@ -27,13 +30,13 @@ public class SecurityConfig {
 			.httpBasic(AbstractHttpConfigurer::disable);
 
 		http.authorizeHttpRequests(
-			authz ->
-				authz.requestMatchers(SecurityConstants.EXCLUDE_URLS)
-					.permitAll()
-					.anyRequest()
-					.authenticated());
-		// .addFilterBefore(
-		//         jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+				authz ->
+					authz.requestMatchers(SecurityConstants.EXCLUDE_URLS)
+						.permitAll()
+						.anyRequest()
+						.authenticated())
+			.addFilterBefore(
+				jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}
