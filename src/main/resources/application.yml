@@ -25,15 +25,6 @@ spring:
   jpa:
     show-sql: ${jpa.show-sql}
     open-in-view: ${jpa.open-in-view}
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: ${google.client.id}
-#            client-secret: ${google.client.password}
-#            scope: profile, email
-
   cloud:
     aws:
       secretsmanager:
