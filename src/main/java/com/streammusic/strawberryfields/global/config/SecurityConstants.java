@@ -4,6 +4,7 @@ public class SecurityConstants {
 	public static final String[] EXCLUDE_URLS = {
 		"/api/v1/user",
 		"/api/v1/user/email-exists",
+		"/api/v1/auth/login",
 		"/resources/**",
 		"/static/**",
 		"/actuator/**",
