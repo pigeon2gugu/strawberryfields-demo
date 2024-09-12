@@ -33,29 +33,37 @@ public class GlobalExceptionHandler {
 		return ApiResult.of(e);
 	}
 
-	// @ResponseStatus(code = NOT_FOUND)
-	// @ExceptionHandler(NotFoundException.class)
-	// public ApiResult<?> handleNotFoundException(final NotFoundException e) {
-	//     log.error(e.getMessage(), e);
-	//
-	//     return ApiResult.of(e);
-	// }
-	//
-	// @ResponseStatus(code = CONFLICT)
-	// @ExceptionHandler(DuplicatedException.class)
-	// public ApiResult<?> handleDuplicatedException(final DuplicatedException e) {
-	//     log.error(e.getMessage(), e);
-	//
-	//     return ApiResult.of(e);
-	// }
-	//
-	// @ResponseStatus(code = UNAUTHORIZED)
-	// @ExceptionHandler(UnauthorizedException.class)
-	// public ApiResult<?> handleUnauthorizedException(final UnauthorizedException e) {
-	//     log.error(e.getMessage(), e);
-	//
-	//     return ApiResult.of(e);
-	// }
+	@ResponseStatus(code = NOT_FOUND)
+	@ExceptionHandler(NotFoundException.class)
+	public ApiResult<?> handleNotFoundException(final NotFoundException e) {
+		log.error(e.getMessage(), e);
+
+		return ApiResult.of(e);
+	}
+
+	@ResponseStatus(code = CONFLICT)
+	@ExceptionHandler(DuplicatedException.class)
+	public ApiResult<?> handleDuplicatedException(final DuplicatedException e) {
+		log.error(e.getMessage(), e);
+
+		return ApiResult.of(e);
+	}
+
+	@ResponseStatus(code = UNAUTHORIZED)
+	@ExceptionHandler(UnauthorizedException.class)
+	public ApiResult<?> handleUnauthorizedException(final UnauthorizedException e) {
+		log.error(e.getMessage(), e);
+
+		return ApiResult.of(e);
+	}
+
+	@ResponseStatus(code = BAD_REQUEST)
+	@ExceptionHandler(BusinessException.class)
+	public ApiResult<?> handleBusinessException(final BusinessException e) {
+		log.error(e.getMessage(), e);
+
+		return ApiResult.of(e);
+	}
 
 	// =================================================================================================================================================
 
