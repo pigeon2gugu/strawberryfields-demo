@@ -8,7 +8,8 @@ public class SignUpDto {
 	public record Request(
 		@NonNull String email,
 		@NonNull String password,
-		@NonNull Role role) {
+		@NonNull Role role,
+		@NonNull String artist) {
 	}
 
 	public record Response(Long userId, String email) {

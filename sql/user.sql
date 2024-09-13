@@ -1,10 +1,11 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
-    id    BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id         BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email      VARCHAR(64)  NOT NULL COMMENT '이메일',
     password   VARCHAR(255) NOT NULL COMMENT '비밀번호',
     role       VARCHAR(16)  NOT NULL COMMENT '역할',
+    artist     VARCHAR(64)  NOT NULL COMMENT '아티스트',
     created_by BIGINT       NOT NULL COMMENT '생성자',
     created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일시',
     updated_by BIGINT       NOT NULL COMMENT '수정자',

@@ -21,13 +21,10 @@ public class UserCommandService {
 	private final UserQueryService userQueryService;
 	private final PasswordEncoder passwordEncoder;
 
-	// TODO : social signUp
 	public SignUpDto.Response signUp(SignUpDto.Request request) {
 
 		validateDuplicate(request);
-
 		User user = createLocalUser(request);
-		userCommandRepository.save(user);
 
 		return new SignUpDto.Response(user.getId(), user.getEmail());
 	}
@@ -40,9 +37,12 @@ public class UserCommandService {
 
 	private User createLocalUser(SignUpDto.Request request) {
 
-		return User.createOf(
+		User user = User.createOf(
 			request.email(),
 			passwordEncoder.encode(request.password()),
-			request.role());
+			request.role(),
+			request.artist());
+
+		return userCommandRepository.save(user);
 	}
 }
