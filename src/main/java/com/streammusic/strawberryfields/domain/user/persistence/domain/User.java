@@ -41,14 +41,20 @@ public class User extends AbstractJpaPersistable {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
+	@Comment("아티스트 명")
+	@Column(name = "artist", length = 64, nullable = false)
+	private String artist;
+
 	public static User createOf(
 		String email,
 		String password,
-		Role role) {
+		Role role,
+		String artist) {
 		return new User(
 			email,
 			password,
-			role
+			role,
+			artist
 		);
 	}
 }
