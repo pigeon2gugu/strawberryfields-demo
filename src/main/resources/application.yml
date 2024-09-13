@@ -31,6 +31,11 @@ spring:
         region: ap-northeast-2
   config:
     import: aws-secretsmanager:secret/strawberryfields
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 logging:
   level:
     root: ${logging.level.root}
