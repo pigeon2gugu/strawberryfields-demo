@@ -31,8 +31,11 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests(
 				authz ->
-					authz.requestMatchers(SecurityConstants.EXCLUDE_URLS)
+					authz
+						.requestMatchers(SecurityConstants.EXCLUDE_URLS)
 						.permitAll()
+						.requestMatchers("/api/v1/agency/**").hasRole("AGENCY")
+						.requestMatchers("/api/v1/composer/**").hasRole("COMPOSER")
 						.anyRequest()
 						.authenticated())
 			.addFilterBefore(

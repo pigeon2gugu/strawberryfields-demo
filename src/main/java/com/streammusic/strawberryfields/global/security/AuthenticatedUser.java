@@ -24,7 +24,7 @@ public class AuthenticatedUser implements UserDetails, RequestUser {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of((GrantedAuthority)() -> "ROLE_USER");
+		return List.of((GrantedAuthority)() -> "ROLE_" + user.getRole().name());
 	}
 
 	@Override
