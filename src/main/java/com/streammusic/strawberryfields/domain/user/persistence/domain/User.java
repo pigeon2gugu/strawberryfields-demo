@@ -42,7 +42,7 @@ public class User extends AbstractJpaPersistable {
 	private Role role;
 
 	@Comment("아티스트 명")
-	@Column(name = "artist", length = 64, nullable = false)
+	@Column(name = "artist", length = 64, nullable = true)
 	private String artist;
 
 	public static User createOf(
