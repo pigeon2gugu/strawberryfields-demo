@@ -15,7 +15,7 @@ public class DuplicatedException extends CustomException {
 	private record DuplicatedResult(DuplicatedResourceCode code) implements ResultCodeProvider {
 		@Override
 		public String getMessage() {
-			return String.format("%s 리소스가 중복됩니다.", code.getMessage());
+			return String.format("%s 이(가) 중복됩니다.", code.getMessage());
 		}
 
 		@Override
