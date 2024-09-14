@@ -5,6 +5,7 @@ import java.util.function.Function;
 import org.springframework.stereotype.Service;
 
 import com.streammusic.strawberryfields.domain.user.persistence.domain.User;
+import com.streammusic.strawberryfields.domain.user.persistence.enums.Role;
 import com.streammusic.strawberryfields.domain.user.persistence.repository.query.UserQueryRepository;
 import com.streammusic.strawberryfields.domain.user.service.dto.CheckDuplicationDto;
 import com.streammusic.strawberryfields.global.exception.NotFoundException;
@@ -21,6 +22,13 @@ public class UserQueryService {
 
 		return userQueryRepository
 			.findById(userId)
+			.orElseThrow(() -> new NotFoundException(NotFoundResourceCode.USER));
+	}
+
+	public User getByIdAndRole(Long userId, Role role) {
+
+		return userQueryRepository
+			.findByIdAndRole(userId, role)
 			.orElseThrow(() -> new NotFoundException(NotFoundResourceCode.USER));
 	}
 

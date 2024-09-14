@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.streammusic.strawberryfields.domain.user.persistence.domain.User;
+import com.streammusic.strawberryfields.domain.user.persistence.enums.Role;
 import com.streammusic.strawberryfields.domain.user.persistence.repository.UserJpaRepository;
 import com.streammusic.strawberryfields.domain.user.persistence.repository.query.UserQueryRepository;
 
@@ -18,6 +19,11 @@ public class UserQueryAdapter implements UserQueryRepository {
 	@Override
 	public Optional<User> findById(Long userId) {
 		return userJpaRepository.findById(userId);
+	}
+
+	@Override
+	public Optional<User> findByIdAndRole(Long userId, Role role) {
+		return userJpaRepository.findByIdAndRole(userId, role);
 	}
 
 	@Override
