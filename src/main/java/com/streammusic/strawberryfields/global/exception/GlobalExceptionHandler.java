@@ -65,6 +65,14 @@ public class GlobalExceptionHandler {
 		return ApiResult.of(e);
 	}
 
+	@ResponseStatus(code = FORBIDDEN)
+	@ExceptionHandler(ForbiddenException.class)
+	public ApiResult<?> handleForbiddenException(final ForbiddenException e) {
+		log.error(e.getMessage(), e);
+
+		return ApiResult.of(e);
+	}
+
 	// =================================================================================================================================================
 
 	@ResponseStatus(code = BAD_REQUEST)
