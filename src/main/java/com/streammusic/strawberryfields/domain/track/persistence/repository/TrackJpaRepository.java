@@ -1,5 +1,7 @@
 package com.streammusic.strawberryfields.domain.track.persistence.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,8 +12,10 @@ import com.streammusic.strawberryfields.domain.user.persistence.domain.User;
 
 public interface TrackJpaRepository extends JpaRepository<Track, Long> {
 
-	public Track save(Track track);
+	Track save(Track track);
 
 	Page<TrackListDto.Response> findAllByUser(Pageable pageable, User user);
+
+	Optional<Track> findById(Long id);
 
 }

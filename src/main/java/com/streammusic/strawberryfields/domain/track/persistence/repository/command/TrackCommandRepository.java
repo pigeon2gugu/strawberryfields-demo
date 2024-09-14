@@ -3,5 +3,5 @@ package com.streammusic.strawberryfields.domain.track.persistence.repository.com
 import com.streammusic.strawberryfields.domain.track.persistence.domain.Track;
 
 public interface TrackCommandRepository {
-	public Track save(Track track);
+	Track save(Track track);
 }
