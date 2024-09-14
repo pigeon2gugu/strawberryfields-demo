@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.streammusic.strawberryfields.domain.track.persistence.domain.Track;
-import com.streammusic.strawberryfields.domain.track.persistence.repository.command.adapter.TrackCommandAdapter;
+import com.streammusic.strawberryfields.domain.track.persistence.repository.command.TrackCommandRepository;
 import com.streammusic.strawberryfields.domain.track.service.dto.UploadTrackDto;
 import com.streammusic.strawberryfields.domain.user.persistence.domain.User;
 import com.streammusic.strawberryfields.domain.user.service.query.UserQueryService;
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class TrackCommandService {
 	private static final List<String> ALLOWED_EXTENSIONS = List.of("mp3", "wav");
 
-	private final TrackCommandAdapter trackCommandAdapter;
+	private final TrackCommandRepository trackCommandRepository;
 	private final UserQueryService userQueryService;
 
 	@Transactional
@@ -49,7 +49,7 @@ public class TrackCommandService {
 
 		Track track = Track.createOf(user, fileNameWithoutExtension, fileData);
 
-		return trackCommandAdapter.save(track);
+		return trackCommandRepository.save(track);
 	}
 
 	private void validateFile(MultipartFile file) {
