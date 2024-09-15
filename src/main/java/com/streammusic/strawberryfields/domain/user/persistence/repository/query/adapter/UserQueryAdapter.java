@@ -36,4 +36,14 @@ public class UserQueryAdapter implements UserQueryRepository {
 		return userJpaRepository.existsByEmail(email);
 	}
 
+	@Override
+	public boolean existsByArtist(String artist) {
+		return userJpaRepository.existsByArtist(artist);
+	}
+
+	@Override
+	public boolean existsByCompany(String company) {
+		return userJpaRepository.existsByCompany(company);
+	}
+
 }
