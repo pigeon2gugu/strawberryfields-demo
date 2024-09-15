@@ -14,4 +14,8 @@ public interface UserQueryRepository {
 
 	boolean existsByEmail(String email);
 
+	boolean existsByArtist(String artist);
+
+	boolean existsByCompany(String company);
+
 }

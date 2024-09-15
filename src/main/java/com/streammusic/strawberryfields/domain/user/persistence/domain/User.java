@@ -45,16 +45,22 @@ public class User extends AbstractJpaPersistable {
 	@Column(name = "artist", length = 64, nullable = true)
 	private String artist;
 
+	@Comment("기획사 명")
+	@Column(name = "company", length = 64, nullable = true)
+	private String company;
+
 	public static User createOf(
 		String email,
 		String password,
 		Role role,
-		String artist) {
+		String artist,
+		String company) {
 		return new User(
 			email,
 			password,
 			role,
-			artist
+			artist,
+			company
 		);
 	}
 }

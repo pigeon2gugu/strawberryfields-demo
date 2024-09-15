@@ -52,4 +52,14 @@ public class UserQueryService {
 		return userQueryRepository.existsByEmail(email);
 	}
 
+	public boolean isDuplicatedArtist(String artist) {
+
+		return userQueryRepository.existsByArtist(artist);
+	}
+
+	public boolean isDuplicatedCompany(String company) {
+
+		return userQueryRepository.existsByCompany(company);
+	}
+
 }
