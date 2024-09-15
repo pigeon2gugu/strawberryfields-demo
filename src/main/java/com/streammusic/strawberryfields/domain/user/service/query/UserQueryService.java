@@ -2,11 +2,14 @@ package com.streammusic.strawberryfields.domain.user.service.query;
 
 import java.util.function.Function;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.streammusic.strawberryfields.domain.user.persistence.domain.User;
 import com.streammusic.strawberryfields.domain.user.persistence.enums.Role;
 import com.streammusic.strawberryfields.domain.user.persistence.repository.query.UserQueryRepository;
+import com.streammusic.strawberryfields.domain.user.service.dto.AgencyListDto;
 import com.streammusic.strawberryfields.domain.user.service.dto.CheckDuplicationDto;
 import com.streammusic.strawberryfields.global.exception.NotFoundException;
 import com.streammusic.strawberryfields.global.exception.resultcode.NotFoundResourceCode;
@@ -37,6 +40,11 @@ public class UserQueryService {
 		return userQueryRepository
 			.findByEmail(email)
 			.orElseThrow(() -> new NotFoundException(NotFoundResourceCode.USER));
+	}
+
+	public Page<AgencyListDto.Response> getAgencies(Pageable pageable) {
+
+		return userQueryRepository.findAllAgency(pageable);
 	}
 
 	public CheckDuplicationDto.Response checkDuplication(

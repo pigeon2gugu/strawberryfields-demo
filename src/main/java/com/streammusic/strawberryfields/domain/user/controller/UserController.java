@@ -1,5 +1,8 @@
 package com.streammusic.strawberryfields.domain.user.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.streammusic.strawberryfields.domain.user.service.command.UserCommandService;
+import com.streammusic.strawberryfields.domain.user.service.dto.AgencyListDto;
 import com.streammusic.strawberryfields.domain.user.service.dto.CheckDuplicationDto;
 import com.streammusic.strawberryfields.domain.user.service.dto.SignUpAgencyDto;
 import com.streammusic.strawberryfields.domain.user.service.dto.SignUpComposerDto;
@@ -59,6 +63,13 @@ public class UserController {
 		return ApiResult.ok(
 			userQueryService.checkDuplication(
 				company, userQueryService::isDuplicatedCompany));
+	}
+
+	@GetMapping("/agency")
+	public ApiResult<Page<AgencyListDto.Response>> getAgencies(
+		@PageableDefault(size = 10) Pageable pageable) {
+
+		return ApiResult.ok(userQueryService.getAgencies(pageable));
 	}
 
 }
