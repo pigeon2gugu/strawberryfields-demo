@@ -39,7 +39,8 @@ public class AuthService {
 		return new LoginDto.Response(
 			jwtTokenProvider.generateAccessTokenValue(user.getId()),
 			refreshTokenCommandService.createAndSaveRefreshToken(user).getRefreshTokenValue(),
-			user.getId());
+			user.getId(),
+			user.getRole());
 	}
 
 	public RegenerateTokenDto.Response regenerateToken(String refreshTokenValue) {
