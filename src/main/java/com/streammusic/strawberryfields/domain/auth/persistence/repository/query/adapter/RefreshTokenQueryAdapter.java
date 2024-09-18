@@ -23,10 +23,9 @@ public class RefreshTokenQueryAdapter implements RefreshTokenQueryRepository {
 	}
 
 	@Override
-	public Optional<RefreshToken> findByUserIdAndRefreshTokenValue(Long userId, String refreshTokenValue) {
+	public Optional<RefreshToken> findByRefreshTokenValue(String refreshTokenValue) {
 
-		return refreshTokenJpaRepository.findByUserIdAndRefreshTokenValue(
-			userId, refreshTokenValue);
+		return refreshTokenJpaRepository.findByRefreshTokenValue(refreshTokenValue);
 	}
 
 }

@@ -19,9 +19,9 @@ public class RefreshTokenQueryService {
 		return refreshTokenQueryRepository.existsByRefreshTokenValue(refreshTokenValue);
 	}
 
-	public Optional<RefreshToken> findByUserIdAndRefreshTokenValue(Long userId, String refreshTokenValue) {
+	public Optional<RefreshToken> findByRefreshTokenValue(String refreshTokenValue) {
 
-		return refreshTokenQueryRepository.findByUserIdAndRefreshTokenValue(userId, refreshTokenValue);
+		return refreshTokenQueryRepository.findByRefreshTokenValue(refreshTokenValue);
 	}
 
 }

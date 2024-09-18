@@ -7,5 +7,5 @@ import com.streammusic.strawberryfields.domain.auth.persistence.domain.RefreshTo
 public interface RefreshTokenQueryRepository {
 	Boolean existsByRefreshTokenValue(String refreshTokenValue);
 
-	Optional<RefreshToken> findByUserIdAndRefreshTokenValue(Long userId, String refreshTokenValue);
+	Optional<RefreshToken> findByRefreshTokenValue(String refreshTokenValue);
 }

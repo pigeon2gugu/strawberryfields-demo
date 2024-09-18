@@ -4,5 +4,5 @@ import com.streammusic.strawberryfields.domain.auth.persistence.domain.RefreshTo
 
 public interface RefreshTokenCommandRepository {
 
-	public RefreshToken save(RefreshToken refreshToken);
+	RefreshToken save(RefreshToken refreshToken);
 }
