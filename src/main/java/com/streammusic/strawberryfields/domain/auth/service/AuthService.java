@@ -2,10 +2,13 @@ package com.streammusic.strawberryfields.domain.auth.service;
 
 import static com.streammusic.strawberryfields.global.exception.resultcode.UnauthorizedExceptionCode.*;
 
+import java.util.Optional;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.streammusic.strawberryfields.domain.auth.persistence.domain.RefreshToken;
 import com.streammusic.strawberryfields.domain.auth.service.command.RefreshTokenCommandService;
 import com.streammusic.strawberryfields.domain.auth.service.dto.LoginDto;
 import com.streammusic.strawberryfields.domain.auth.service.dto.RegenerateTokenDto;
@@ -39,15 +42,17 @@ public class AuthService {
 			user.getId());
 	}
 
-	public RegenerateTokenDto.Response regenerateToken(String refreshTokenValue, Long userId) {
+	public RegenerateTokenDto.Response regenerateToken(String refreshTokenValue) {
 
 		validateRefreshToken(refreshTokenValue);
-		User user = userQueryService.getById(userId);
+		Optional<RefreshToken> refreshToken = refreshTokenQueryService.findByRefreshTokenValue(refreshTokenValue);
 
-		refreshTokenCommandService.delete(userId, refreshTokenValue);
+		User user = userQueryService.getById(refreshToken.get().getUser().getId());
+
+		refreshTokenCommandService.delete(refreshTokenValue);
 
 		return new RegenerateTokenDto.Response(
-			jwtTokenProvider.generateAccessTokenValue(userId),
+			jwtTokenProvider.generateAccessTokenValue(user.getId()),
 			refreshTokenCommandService.createAndSaveRefreshToken(user).getRefreshTokenValue()
 		);
 	}

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.streammusic.strawberryfields.domain.auth.service.AuthService;
 import com.streammusic.strawberryfields.domain.auth.service.dto.LoginDto;
 import com.streammusic.strawberryfields.domain.auth.service.dto.RegenerateTokenDto;
-import com.streammusic.strawberryfields.domain.user.service.dto.RequestUser;
 import com.streammusic.strawberryfields.global.common.ApiResult;
-import com.streammusic.strawberryfields.global.security.Authenticated;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +30,8 @@ public class AuthController {
 
 	@GetMapping("/refresh")
 	public ApiResult<RegenerateTokenDto.Response> regenerateToken(
-		@RequestHeader("refreshToken") String refreshToken,
-		@Authenticated RequestUser requestUser) {
+		@RequestHeader("refreshToken") String refreshToken) {
 
-		return ApiResult.ok(authService.regenerateToken(refreshToken, requestUser.getUserId()));
+		return ApiResult.ok(authService.regenerateToken(refreshToken));
 	}
 }

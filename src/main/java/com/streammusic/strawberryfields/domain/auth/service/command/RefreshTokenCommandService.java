@@ -73,10 +73,10 @@ public class RefreshTokenCommandService {
 	}
 
 	@Transactional
-	public void delete(Long userId, String refreshTokenValue) {
+	public void delete(String refreshTokenValue) {
 
 		refreshTokenQueryService
-			.findByUserIdAndRefreshTokenValue(userId, refreshTokenValue)
+			.findByRefreshTokenValue(refreshTokenValue)
 			.ifPresent(RefreshToken::expireRefreshToken);
 	}
 }

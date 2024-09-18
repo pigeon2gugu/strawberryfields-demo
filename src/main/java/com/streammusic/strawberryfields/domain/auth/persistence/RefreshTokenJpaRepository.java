@@ -8,9 +8,9 @@ import com.streammusic.strawberryfields.domain.auth.persistence.domain.RefreshTo
 
 public interface RefreshTokenJpaRepository extends JpaRepository<RefreshToken, Long> {
 
-	public RefreshToken save(RefreshToken refreshToken);
+	RefreshToken save(RefreshToken refreshToken);
 
 	Boolean existsByRefreshTokenValue(String refreshTokenValue);
 
-	Optional<RefreshToken> findByUserIdAndRefreshTokenValue(Long userId, String refreshTokenValue);
+	Optional<RefreshToken> findByRefreshTokenValue(String refreshTokenValue);
 }
