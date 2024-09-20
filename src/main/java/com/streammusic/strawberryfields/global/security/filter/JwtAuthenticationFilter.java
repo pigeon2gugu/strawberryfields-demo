@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserQueryService userQueryService;
+	private final FilterExceptionHandler filterExceptionHandler;
 	private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
 	@Override
@@ -50,20 +52,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 		String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-		extractToken(authorization)
-			.ifPresentOrElse(
-				jwtToken -> {
-					jwtTokenProvider.validateToken(jwtToken);
+		try {
+			extractToken(authorization)
+				.ifPresentOrElse(
+					jwtToken -> {
+						jwtTokenProvider.validateToken(jwtToken); // 토큰 검증
 
-					Authentication authentication =
-						getAuthentication(jwtTokenProvider.getSubject(jwtToken));
-					SecurityContextHolder.getContext().setAuthentication(authentication);
-				},
-				() -> {
-					throw new UnauthorizedException(MISSING_AUTHORIZATION_HEADER);
-				});
+						Authentication authentication =
+							getAuthentication(jwtTokenProvider.getSubject(jwtToken));
+						SecurityContextHolder.getContext().setAuthentication(authentication);
+					},
+					() -> {
+						throw new UnauthorizedException(MISSING_AUTHORIZATION_HEADER);
+					});
 
-		filterChain.doFilter(request, response);
+			filterChain.doFilter(request, response);
+
+		} catch (UnauthorizedException exception) {
+			filterExceptionHandler.handleException(response, HttpStatus.UNAUTHORIZED, exception);
+		} catch (BusinessException exception) {
+			filterExceptionHandler.handleException(response, HttpStatus.BAD_REQUEST, exception);
+		} catch (Exception exception) {
+			filterExceptionHandler.handleException(response, HttpStatus.INTERNAL_SERVER_ERROR, exception);
+		}
+
 	}
 
 	private boolean isExcludedPath(String path) {
