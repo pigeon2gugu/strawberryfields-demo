@@ -41,6 +41,10 @@ public class ApiResult<T> {
 		return of("BAD_REQUEST", message, null);
 	}
 
+	public static ApiResult<String> unAuthorized(CustomException customException) {
+		return of(String.valueOf(customException.getResultCode()), customException.getMessage(), null);
+	}
+
 	public static ApiResult<List<ValidationErrorResponse>> badRequest(
 		List<ValidationErrorResponse> validationErrors) {
 		return of("INVALIDATE_REQUEST", "요청 값이 잘 못 되었습니다.", validationErrors);
