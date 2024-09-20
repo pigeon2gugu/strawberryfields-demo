@@ -13,6 +13,7 @@ public class SecurityConstants {
 		"/static/**",
 		"/actuator/**",
 		"/swagger-ui/**",
-		"/swagger-resources/**"
+		"/swagger-resources/**",
+		"/v3/api-docs/**"
 	};
 }
