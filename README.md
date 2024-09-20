@@ -72,7 +72,7 @@ java -jar build/libs/strawberryfields-*-SNAPSHOT.jar
 
 ## 사용 가이드
 
-프로젝트를 실행 한 후, strawberryfields-demo-front 프로젝트 (https://github.com/pigeon2gugu/strawberryfields-demo-front)를 실행해 주세요.
+프로젝트를 실행 한 후, strawberryfields-demo-front 프로젝트 (https://github.com/pigeon2gugu/strawberryfields-demo-front) 를 실행해 주세요.
 
 ### API
 
